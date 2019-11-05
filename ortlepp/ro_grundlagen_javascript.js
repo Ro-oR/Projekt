@@ -9,6 +9,23 @@ function sayHello(name) {
 //Führt die Funktion aus
 sayHello('Robin')
 
+const hello = "hello"
+
+function funktioniert() {
+    const world = " World"
+    return hello+ world;
+    }
+function funktioniertnicht (){
+    return world+hello; //Hier taucht ein Fehler auf, da die Variable "world" nur in der 
+                        //oberen Funktion "funktioniert" deklariert wird und nicht global vorhanden ist.
+                        //
+    }
+
+let w = funktioniert();
+let w1 = funktioniertnicht();
+
+console.log("\n",w,"\n");
+console.log(w1,"\n");
 
 /*//Zufällige Bewertungen für vorgegebene Anzahl an Bewertungen
 const bewertungMax = 5
@@ -72,7 +89,7 @@ async function randomBew() {
 		        console.log ("Die Bewertung ist:" +x)
 		        anzahl++
 	            gesamt = gesamt + x
-	            console.log("Gesamtzahl der Bewertungen:" +anzahl )
+                console.log("Gesamtzahl der Bewertungen:" +anzahl )
                 console.log("Gesamtbewertung:"+(gesamt/anzahl))
             }
 
@@ -81,13 +98,27 @@ async function randomBew() {
             bewArray.push(x)
             bewArray.push(anzahl)
             //und schlie0lich ausgegeben
-            console.log("Array-Ausgabe:")
-            console.log("\n\nBewertungsname: "+bewArray[0],"\nAktuelle Bewertung: "+bewArray[1],"\nAnzahl der Bewertungen: "+bewArray[2])
+            console.log("\n\nArray-Ausgabe:")
+            console.log("Bewertungsname: "+bewArray[0],"\nAktuelle Bewertung: "+bewArray[1],"\nAnzahl der Bewertungen: "+bewArray[2])
+
 
             //Hier werden die o.g. Komponenten in ein Objekt eingefügt
-            let ratings = {i,x,anzahl};
-            console.log("Object-Ausgabe:")
-            console.log("\n\n"+ratings)
+            let ratings1 = new ratings(i,anzahl,x,gesamt);
+
+            function ratings (i,anzahl,x,gesamt)  {
+                this.name = i
+                this.anzahl = anzahl
+                this.lastBewertung = x
+                this.gesamt = gesamt
+                this.durchschnitt = () => {   //Verkürzte Schreibweise einer Funktion dank Arrow 
+                    return (this.gesamt/this.anzahl)
+                }
+            };
+
+            console.log("\n\nObject-Ausgabe:");
+            console.log("Nummer: ",ratings1.name)
+            console.log("Durchschnitt: ", ratings1.durchschnitt());
+
             bewertung.close();
          }
     })
@@ -97,7 +128,8 @@ await randomBew()
 
 
 
-console.log('\n')
+console.log('\n\n')
+
 
 }
 main()
