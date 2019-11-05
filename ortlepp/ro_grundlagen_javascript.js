@@ -10,6 +10,7 @@ function sayHello(name) {
 sayHello('Robin')
 
 const hello = "hello"
+//const world = "world"   | Eine mögliche Lösung wäre, world ebenfalls global zu definieren
 
 function funktioniert() {
     const world = " World"
