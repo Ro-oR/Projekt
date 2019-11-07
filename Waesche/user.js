@@ -1,25 +1,40 @@
 const Ticket = require("./ticket.js");
+const RegionalTicket = require("./ticket.js");
+const fs = require("fs");
 
 function userCount(){
-    var users = 0
-    return users
+    var count = JSON.parse(fs.readFileSync('./userCount.json', 'utf8', (err) => {
+            if (err) {
+                console.log("Lesefehler", err)
+                return
+            }
+        })
+    )
+    count.UserCount++
+
+    fs.writeFileSync('./userCount.json', JSON.stringify(count), err => {
+        if (err) { console.log("Schreibfehler", err) }
+    })
+
+    return count.UserCount
 }
 
-var users = 0
-
 class User{
-    constructor(/*ID,*/ username, contact){
-        this.userID = users++//ID
+    constructor(username, contact){
+        this.userID = userCount()
         this.username = username
         this.contact = contact //Handynummer/Email
         this.tickets = new Array
     }
-    addTicket(){
-        var t = new Ticket(this.userID)
-        this.tickets.push(t)
+    addTicket(bereich){
+        var t = new Ticket(this.userID, bereich)
+        this.tickets.push(t.ticketID)
+        console.log(t.owner + " " + this.tickets)
     }
-    print(){
-        console.log("Hallo " + this.userID + " " + this.tickets[0].uID)//this.tickets[0].u.username)
+    addRegionalTicket(bereich){
+        var t = new RegionalTicket(this.userID, bereich)
+        this.tickets.push(t.ticketID)
+        console.log(t.owner + " " + this.tickets)
     }
 }
 

@@ -1,12 +1,27 @@
+const fs = require("fs");
 
-var tickets = 0
+function ticketCount(){
+    var count = JSON.parse(fs.readFileSync('./ticketCount.json', 'utf8', (err) => {
+            if (err) {
+                console.log("Lesefehler", err)
+                return
+            }
+        })
+    )
+    count.TicketCount++
+
+    fs.writeFileSync('./ticketCount.json', JSON.stringify(count), err => {
+        if (err) { console.log("Schreibfehler", err) }
+    })
+
+    return count.TicketCount
+}
 
 class Ticket{
-    constructor(uID){
+    constructor(uID, bereich){
+        this.ticketID = ticketCount()
         this.owner = uID
-        this.ticketID = tickets++
-        this.ticketType = ""
-        this.test = "o/"
+        this.bereich = bereich
     }
     changeUser(newID){
         owner = newID
