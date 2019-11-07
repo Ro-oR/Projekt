@@ -10,6 +10,6 @@ u3.addRegionalTicket("NRW")
 u3.addTicket("Köln - Berlin")
 
 
-for(var i = 0; i < 100; i++){
-    console.log(new User("Test2", "test2@test"))
-}
+// for(var i = 0; i < 100; i++){
+//     console.log(new User("Test", "test@test"))
+// }
