@@ -8,8 +8,3 @@ console.log(u1.username + " " + u1.userID)
 console.log(u2.username + " " + u2.userID)
 u3.addRegionalTicket("NRW")
 u3.addTicket("Köln - Berlin")
-
-
-// for(var i = 0; i < 100; i++){
-//     console.log(new User("Test", "test@test"))
-// }

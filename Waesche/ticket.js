@@ -18,10 +18,10 @@ function ticketCount(){
 }
 
 class Ticket{
-    constructor(uID, bereich){
-        this.ticketID = ticketCount()
-        this.owner = uID
+    constructor(ownerID, bereich){
+        this.owner = ownerID
         this.bereich = bereich
+        this.ticketID = ticketCount()
     }
     changeUser(newID){
         owner = newID
