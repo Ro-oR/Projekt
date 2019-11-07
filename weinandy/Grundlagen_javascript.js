@@ -4,7 +4,7 @@
 console.log('Maura')
 
 //Aufgabe2
-// Konstante mit maximaler Bewertung, Variable Bewertung und Variable Anzahl Bewertung
+// Konstante mit maximaler Bewertung, Variablen Bewertung und Anzahl der Bewertungen
 
 const maxBewertung = 5
 var bewertung = 4
@@ -17,17 +17,19 @@ console.log(bewertung)
 console.log(anzahl)
 
 //neue Werte
-bewertung = 5
-anzahl = 0
-//maxBewertung = 9 //ERROR
+bewertung = 3
+//maxBewertung = 9 // verursacht Error, da Assignment zu einer Konstanten
+anzahl = 17
 
-console.log('\n')
 console.log(maxBewertung)
 console.log(bewertung)
 console.log(anzahl)
 
+// Neue Werte für Variablen werden einfach übernommen und die Alten überschrieben
+
 
 //Aufgabe 3: Bewertung über die Konsole einlesen, passend zur Konstante
+//Einbindung des Readline-Moduls
 
 const readline = require('readline');
 const rl = readline.createInterface({
@@ -38,7 +40,7 @@ const rl = readline.createInterface({
 /*
 console.log('\n')
 rl.question('Bitte geben Sie die Bewertung ein (zwischen 0 und 5):', function(answer) {
-	if (answer >=0 && answer <= maxBewertung) {
+	if (answer >=0 && answer <= maxBewertung) { // Werte zwischen 0 und maxBewertung erlaubt
 		console.log('Ihre Bewertung:' +answer); 
 		anzahl++
 		console.log(anzahl)
@@ -52,12 +54,14 @@ rl.question('Bitte geben Sie die Bewertung ein (zwischen 0 und 5):', function(an
 
 function getRandom(min, max) {
 	return Math.floor(Math.random() * (max - min +1)) + min; 
-  } 
+  } //Funktion um Zufallszahl zwischen (max & min) zuerstellen
+
 console.log('\n')
+
 rl.question('Wie oft soll bewertet werden?:', function(answer) {
 	var gesamt =0 
-	for(i=0; i<answer; i++){
-		var x = getRandom(0, maxBewertung)
+	for(i=0; i<answer; i++){ // n mal bewerten 
+		var x = getRandom(0, maxBewertung) //Berechnung der Bewertung in Funktion
 		console.log('\nDies ist Bewertung Nummer '+(i+1))
 		console.log ("Die Bewertung ist:" +x)
 		anzahl++
@@ -67,4 +71,4 @@ rl.question('Wie oft soll bewertet werden?:', function(answer) {
 	}
 	rl.close();
 	
-})
+}) 
