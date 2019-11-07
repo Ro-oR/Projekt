@@ -9,24 +9,6 @@ function sayHello(name) {
 //Führt die Funktion aus
 sayHello('Robin')
 
-const hello = "hello"
-//const world = "world"   | Eine mögliche Lösung wäre, world ebenfalls global zu definieren
-
-function funktioniert() {
-    const world = " World"
-    return hello+ world;
-    }
-function funktioniertnicht (){
-    return world+hello; //Hier taucht ein Fehler auf, da die Variable "world" nur in der 
-                        //oberen Funktion "funktioniert" deklariert wird und nicht global vorhanden ist.
-                        //
-    }
-
-let w = funktioniert();
-let w1 = funktioniertnicht();
-
-console.log("\n",w,"\n");
-console.log(w1,"\n");
 
 /*//Zufällige Bewertungen für vorgegebene Anzahl an Bewertungen
 const bewertungMax = 5
@@ -98,7 +80,7 @@ async function randomBew() {
             bewArray.push(i)
             bewArray.push(x)
             bewArray.push(anzahl)
-            //und schlie0lich ausgegeben
+            //und schließlich ausgegeben
             console.log("\n\nArray-Ausgabe:")
             console.log("Bewertungsname: "+bewArray[0],"\nAktuelle Bewertung: "+bewArray[1],"\nAnzahl der Bewertungen: "+bewArray[2])
 
@@ -117,7 +99,7 @@ async function randomBew() {
             };
 
             console.log("\n\nObject-Ausgabe:");
-            console.log("Nummer: ",ratings1.name)
+            console.log("Bewertungsname: ",ratings1.name)
             console.log("Durchschnitt: ", ratings1.durchschnitt());
 
             bewertung.close();
@@ -127,10 +109,29 @@ async function randomBew() {
 
 await randomBew()
 
-
+/*
 
 console.log('\n\n')
 
+const hello = "hello"
+//const world = "world"   | Eine mögliche Lösung wäre, world ebenfalls global zu definieren
+
+function funktioniert() {
+    const world = " World"
+    return hello+ world;
+    }
+function funktioniertnicht (){
+    return world+hello; //Hier taucht ein Fehler auf, da die Variable "world" nur in der 
+                        //oberen Funktion "funktioniert" deklariert wird und nicht global vorhanden ist.
+                        //
+    }
+
+let w = funktioniert();
+let w1 = funktioniertnicht();
+
+console.log("\n",w,"\n");
+console.log(w1,"\n");
+*/
 
 }
 main()
