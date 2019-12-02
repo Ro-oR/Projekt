@@ -1,4 +1,5 @@
 const User = require("./user.js");
+const functions = require("./functions.js")
 var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;//Installieren via "npm i xmlhttprequest"
 
 var apitoken = "3d67bf9773fba69970a84b25e1ae9b3d"
@@ -23,4 +24,6 @@ console.log(u2.username + " " + u2.userID)
 u3.addRegionalTicket("NRW")
 u3.addTicket("Köln - Berlin")
 
-console.log(testfun1())
+//console.log(testfun1())
+
+console.log(functions.umlautCheck("Köln"))
