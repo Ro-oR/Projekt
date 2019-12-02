@@ -1,0 +1,14 @@
+Philipp Wäsche
+
+Lehrplan Phase 1:
+
+    14.10 - 20.10:  Alte Javaskript Projekt ausgraben
+                    Anhand erster Projektidee anfängliche Klassen und Funktionen erstellen
+                    Aufgabenblatt 1
+
+    21.10 - 27.10:  Neu Projektidee, bereits erstellte Klassen und Funktionen wo möglich
+                    übernehmen und/oder erweitern
+
+    28.10 - 03.11:  Aufgabenblatt 2
+    
+    04.11 - 10.11:  Aufgabenblatt 3
