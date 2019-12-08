@@ -12,5 +12,6 @@ console.log(u2.username + " " + u2.userID)
 u3.addRegionalTicket("NRW")
 u3.addTicket("Köln - Berlin")
 
-console.log(functions.bahnhofSuche("Gummersbach"))
-console.log(functions.bahnhofSuche("Köln hbf"))
+console.log(functions.bahnhofIDSuche("gummersbach"))
+console.log(functions.bahnhofIDSuche("köln hbf"))
+console.log(functions.fahrplanAbfrage("8002462","191209","08"))
