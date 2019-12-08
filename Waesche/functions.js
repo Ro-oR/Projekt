@@ -13,14 +13,26 @@ function umlautCheck(str){
 }
 
 module.exports = {
-    bahnhofSuche: function(str){
+    bahnhofIDSuche: function(str){
         var suche = umlautCheck(str)
         var request = new XMLHttpRequest()
         request.open("GET", "https://api.deutschebahn.com/stada/v2/stations?searchstring="+suche, false)
         request.setRequestHeader("Authorization", "Bearer " + apitoken)
         request.send()
-        var test = JSON.parse(request.responseText)
-        console.log("\n" + test.result + "\n")
-        return test//request.responseText
+        //var test = JSON.parse(request.responseText)
+        //console.log("\n" + test.result + "\n")
+
+        var test = request.responseText
+        test = test.split("evaNumbers\":[{\"number\":")
+        var test2 = test[1].split(",")
+
+        return test2[0]//request.responseText
+    },
+    fahrplanAbfrage: function(bahnhofsID, datum, stunde){
+        var request = new XMLHttpRequest()
+        request.open("GET", "https://api.deutschebahn.com/timetables/v1/plan/"+bahnhofsID+"/"+datum+"/"+stunde, false)
+        request.setRequestHeader("Authorization", "Bearer " + apitoken)
+        request.send()
+        return request.responseText
     }
 }
