@@ -14,4 +14,5 @@ u3.addTicket("Köln - Berlin")
 
 console.log(functions.bahnhofIDSuche("gummersbach"))
 console.log(functions.bahnhofIDSuche("köln hbf"))
-console.log(functions.fahrplanAbfrage("8002462","191209","08"))
+//console.log(functions.fahrplanAbfrage("8002462","191209","13"))
+console.log(functions.fahrplanAbfrage("8000207","191209","13"))
