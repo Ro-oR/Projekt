@@ -1,5 +1,8 @@
 var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;//Installieren via "npm i xmlhttprequest"
 var apitoken = "3d67bf9773fba69970a84b25e1ae9b3d"
+var xml2js = require('xml2js');
+ 
+var XMLparser = new xml2js.Parser();//npm install xml2js
 
 function umlautCheck(str){
     str = str.replace("ä", "%C3%A4")
@@ -10,6 +13,9 @@ function umlautCheck(str){
     str = str.replace("Ü", "%C3%9C")
     str = str.replace("ß", "%C3%9F")
     return str
+}
+function umlautConverter(str){
+
 }
 
 module.exports = {
@@ -33,6 +39,10 @@ module.exports = {
         request.open("GET", "https://api.deutschebahn.com/timetables/v1/plan/"+bahnhofsID+"/"+datum+"/"+stunde, false)
         request.setRequestHeader("Authorization", "Bearer " + apitoken)
         request.send()
+
+        var test = XMLparser.parseString(request.responseText)
+        console.log(test)
+
         return request.responseText
     }
 }
