@@ -1,10 +1,7 @@
-var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;//Installieren via "npm i xmlhttprequest"
-var apitoken = "3d67bf9773fba69970a84b25e1ae9b3d"
-var xml2js = require('xml2js');
- 
-var XMLparser = new xml2js.Parser();//npm install xml2js
+const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;//Installieren via "npm i xmlhttprequest"
+const apitoken = "3d67bf9773fba69970a84b25e1ae9b3d"
+const xml2js = require('xml2js');//npm install xml2js
 
-//var XMLparser = require('fast-xml-parser');//npm install fast-xml-parser
 var util = require("util")
 
 function umlautCheck(str){
@@ -87,10 +84,10 @@ module.exports = {
         // console.log(streckeAR)
         // console.log(streckeDP)
 
-        console.log(strecke)
+        // console.log(strecke)
 
-        console.log(":D")
+        // console.log(":D")
 
-        return test.timetable.s //request.responseText
+        return (strecke+"|"+startBahnhof).toLocaleLowerCase() //request.responseText
     }
 }
