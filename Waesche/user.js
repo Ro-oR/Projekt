@@ -31,6 +31,17 @@ function angebotListe(){
     return angebote
 }
 
+function suchenListe(){
+    var suchen = JSON.parse(fs.readFileSync('./suchen.json', 'utf8', (err) => {
+            if (err) {
+                console.log("Lesefehler", err)
+                return
+            }
+        })
+    )
+    return suchen
+}
+
 class User{
     constructor(username, contact){
         this.userID = userCount()
@@ -58,7 +69,19 @@ class User{
         }
         var alleAngebote = angebotListe()
         alleAngebote.push(neuesAngebot)
-        fs.writeFileSync('./angebote.json', JSON.stringify(alleAngebote), err => {
+        fs.writeFileSync('./angebote.json', JSON.stringify(alleAngebote, null, 4), err => {
+            if (err) { console.log("Schreibfehler", err) }
+        })
+    }
+    addSuche(fahrtstrecke){
+        this.suchen.push(fahrtstrecke)
+        var neueSuche = {
+            suchender : this.userID,
+            strecke : fahrtstrecke
+        }
+        var alleSuchen = suchenListe()
+        alleSuchen.push(neueSuche)
+        fs.writeFileSync('./suchen.json', JSON.stringify(alleSuchen, null, 4), err => {
             if (err) { console.log("Schreibfehler", err) }
         })
     }
