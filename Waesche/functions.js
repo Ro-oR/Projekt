@@ -36,7 +36,7 @@ function bahnhofIDSuche(str){
     str = str.split("evaNumbers\":[{\"number\":")
     var id = str[1].split(",")
 
-    return id[0]//request.responseText
+    return id[0]
 }
 
 module.exports = {
@@ -73,7 +73,7 @@ module.exports = {
                 strecke = JSON.stringify(response.timetable.s[i].ar[0]).split("ppth\":\"")[1].split("\"}}")[0]
             }
         }
-        return (strecke+"|"+startBahnhof).toLocaleLowerCase() //request.responseText
+        return (strecke+"|"+startBahnhof).toLocaleLowerCase()
     },
     checkSuchen: function(strecke){
         var suchen = JSON.parse(fs.readFileSync('./suchen.json', 'utf8', (err) => {
