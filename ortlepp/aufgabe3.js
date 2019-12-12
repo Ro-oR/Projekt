@@ -1,6 +1,6 @@
-// Aufgabeblatt 3
+// Aufgabe 3
 
-// readline-Modul einfügen
+// readline
 'use strict';
 const readline = require('readline');
 
@@ -11,14 +11,14 @@ const rl = readline.createInterface({
 
 let z = 1000000
 
-//Stadt erstellen
-function Stadt (einwohnerzahl, name, bundesland) {
+//Stadterstellung
+function Stadt (name, einwohnerzahl, bundesland) {
     this.name = name;
     this.einwohnerzahl = einwohnerzahl;
     this.bundesland = bundesland;
 }
 
-// Funktion für de Erstellung des Objektes für Benutzer
+// Benutzererstellung
 function Benutzer(name, nachname, Email, Wohnort) {
     this.name = name;
     this.nachname = nachname;
@@ -27,7 +27,7 @@ function Benutzer(name, nachname, Email, Wohnort) {
 }
 
 
-// neue Stadt-Objekte erstellen
+// Stadtobjekte erstellen
 let bonn = new Stadt(350510, 'Bonn','NRW')
 let berlin = new Stadt(3644826, "Berlin", "Berlin")
 
@@ -42,7 +42,7 @@ const fs = require ('fs');
 const citypath = './cities.json';
 const userpath = './user.json';
 
-// Daten zu JSON File exportieren 
+// JSON File füllen 
 function pushtofile (arrayfromoutside, path) {
     return new Promise ((resolve, reject) => {
         fs.writeFileSync('./cities.json', JSON.stringify(arrayfromoutside, null, 4));
@@ -51,7 +51,7 @@ function pushtofile (arrayfromoutside, path) {
     })
 }
 
-// Daten holen über Promise
+// Daten abholen
 function ReadJSON() {
     return new Promise ((resove, reject) => {
         stadtArray = require (citypath);
@@ -63,7 +63,7 @@ function ReadJSON() {
 var array = [];
 var y = 0;
 
-// Element löschen
+// Stadt löschen über readline
 function datenLoeschen (arrayfromoutside) {
     return new Promise ((resolve, reject) => {
         rl.question('Welche Stadt soll gelöscht werden?\n', answer =>{
@@ -80,14 +80,14 @@ function datenLoeschen (arrayfromoutside) {
 
 let City1 = new Stadt(0,'', ' ')
 
-// neue Stadt anlegen 
+// Anlegen einer Stadt über readline 
 
 function neueStadt () {
     return new Promise((resolve, reject) => {
-        rl.question('Wieviele Einwohner hat die City?\n', answer => {
-            City1.einwohnerzahl = answer;
-            rl.question('Wie ist der Name der City?\n', answer2 => {
-                City1.name = parseInt(answer2);
+        rl.question('Wie ist der Name der City?\n', answer => {
+            City1.name = answer;
+            rl.question('Wieviele Einwohner hat die City?\n', answer2 => {
+                City1.einwohnerzahl = parseInt(answer2);
                 rl.question('In welchem Bundesland?\n', answer3 => {
                     City1.bundesland = answer3;
                     stadtArray.push(City1);
@@ -131,6 +131,7 @@ async function menue (answer) {
 async function main () {
     frage().then(menue(ende));
 }
+
 
 
 // Fehlercatches
