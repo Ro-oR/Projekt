@@ -17,4 +17,4 @@ console.log(functions.Datum())
 //console.log(functions.bahnhofIDSuche("köln hbf"))
 
 u1.addAngebot(functions.fahrplanAbfrage("gummersbach", "köln hbf","191212","09"))
-u2.addSuche(functions.fahrplanAbfrage("gummersbach", "köln hbf","191212","09"))
+u2.addSuche(functions.fahrplanAbfrage("dieringhausen", "köln hbf","191212","09"))
