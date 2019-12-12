@@ -1,52 +1,12 @@
 [
     {
-    "einwohner": 3644826,
-    "name": "Berlin",
-    "bundesland": "Berlin"
-},
-{
-    "einwohner": 1841179,
-    "name": "Hamburg",
-    "bundesland": "Hamburg"
-},
-{
-    "einwohner": 1471508,
-    "name": "München",
-    "bundesland": "Bayern"
-},
-{
-    "einwohner": 1085664,
-    "name": "Köln",
-    "bundesland": "NRW"
-},
-{
-    "einwohner": 753056,
-    "name": "Frankfurt Main",
-    "bundesland": "Hessen"
-},
-{
-    "einwohner": 634830,
-    "name": "Stuttgart",
-    "bundesland": "Baden-Würtemberg"
-},
-{
-    "einwohner": 619294,
-    "name": "Düsseldorf",
-    "bundesland": "NRW"
-},
-{
-    "einwohner": 587857,
-    "name": "Leipzig",
-    "bundesland": "Sachsen"
-},
-{
-    "einwohner": 587010,
-    "name": "Dortmund",
-    "bundesland": "NRW"
-},
-{
-    "einwohner": 583109,
-    "name": "Essen",
-    "bundesland": "NRW"
-}
+        "name": "Bonn",
+        "einwohnerzahl": 356482,
+        "bundesland": "NRW"
+    },
+    {
+        "name": "Bonn",
+        "einwohnerzahl": 256841,
+        "bundesland": "NRW"
+    }
 ]
