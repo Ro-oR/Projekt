@@ -1,0 +1,28 @@
+[
+    {
+        "name": "Berlin",
+        "einwohnerzahl": 2300000,
+        "bundesland": "Berlin"
+    },
+    {
+        "name": "Köln",
+        "einwohner": 0,
+        "bundesland": "NRW",
+        "einwohnerzahl": 1008000
+    },
+    {
+        "name": "BergischGladbach",
+        "einwohnerzahl": 101000,
+        "bundesland": "NRW"
+    },
+    {
+        "name": "Leverkusen",
+        "einwohnerzahl": 300500,
+        "bundesland": "NRW"
+    },
+    {
+        "name": "Kiel",
+        "einwohnerzahl": 200000,
+        "bundesland": "Schleswig Holstein"
+    }
+]
