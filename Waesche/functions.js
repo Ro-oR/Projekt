@@ -1,6 +1,7 @@
 const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;//Installieren via "npm i xmlhttprequest"
 const apitoken = "3d67bf9773fba69970a84b25e1ae9b3d"
 const xml2js = require('xml2js');//npm install xml2js
+const fs = require("fs");
 
 var util = require("util")
 
@@ -52,42 +53,52 @@ module.exports = {
         request.setRequestHeader("Authorization", "Bearer " + apitoken)
         request.send()
 
-        var test
+        var response
 
         const parser = new xml2js.Parser({ attrkey: "ATTR" });
         let xml_string = request.responseText
 
         parser.parseString(xml_string, function(error, result) {
             if(error === null) {
-                test = result
+                response = result
             }
-            else {
-                console.log(error)
-            }
+            else { console.log(error) }
         });
 
         var strecke
 
-        for(var i = 0; i < test.timetable.s.length; i++){
-            var string = JSON.stringify(test.timetable.s[i].ar[0]).split("ppth\":\"")[1]
+        for(var i = 0; i < response.timetable.s.length; i++){
+            var string = JSON.stringify(response.timetable.s[i].ar[0]).split("ppth\":\"")[1]
             if(string.toLocaleLowerCase().includes(ziel)) {
-                strecke = JSON.stringify(test.timetable.s[i].ar[0]).split("ppth\":\"")[1].split("\"}}")[0]
+                strecke = JSON.stringify(response.timetable.s[i].ar[0]).split("ppth\":\"")[1].split("\"}}")[0]
             }
         }
-
-        // var streckeAR = JSON.stringify(test.timetable.s[0].ar[0]).split("ppth\":\"")[1]
-        // streckeAR = streckeAR.split("\"}}")[0]
-
-        // var streckeDP = JSON.stringify(test.timetable.s[0].dp[0]).split("ppth\":\"")[1]
-        // streckeDP = streckeDP.split("\"}}")[0]
-
-        // console.log(streckeAR)
-        // console.log(streckeDP)
-
-        // console.log(strecke)
-
-        // console.log(":D")
-
         return (strecke+"|"+startBahnhof).toLocaleLowerCase() //request.responseText
+    },
+    checkSuchen: function(strecke){
+        var suchen = JSON.parse(fs.readFileSync('./suchen.json', 'utf8', (err) => {
+                if (err) {
+                    console.log("Lesefehler", err)
+                    return
+                }
+            })
+        )
+        for(var i = 0; i < suchen.length; i++){
+            if(strecke.includes(suchen[i].strecke)) return suchen[i].suchender
+        }
+        return 0
+    },
+    checkAngebote: function(strecke){
+        var angebote = JSON.parse(fs.readFileSync('./angebote.json', 'utf8', (err) => {
+                if (err) {
+                    console.log("Lesefehler", err)
+                    return
+                }
+            })
+        )
+        for(var i = 0; i < angebote.length; i++){
+            if(angebote[i].strecke.includes(strecke)) return angebote[i].anbieter
+        }
+        return 0
     }
 }
