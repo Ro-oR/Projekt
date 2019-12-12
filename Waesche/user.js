@@ -72,18 +72,25 @@ class User{
         fs.writeFileSync('./angebote.json', JSON.stringify(alleAngebote, null, 4), err => {
             if (err) { console.log("Schreibfehler", err) }
         })
+        var suchen = functions.checkSuchen(fahrtstrecke)
+        if(suchen != 0) console.log("Mitfahrer gefunden! UserID " + suchen)
     }
     addSuche(fahrtstrecke){
-        this.suchen.push(fahrtstrecke)
-        var neueSuche = {
-            suchender : this.userID,
-            strecke : fahrtstrecke
+        var anbieter = functions.checkAngebote(fahrtstrecke)
+        if(anbieter != 0) console.log("Anbieter gefunden! UserID " + anbieter)
+        else {
+            console.log("Kein Anbieter gefunden.\nAnfrage wird den gesuchen hinzugefügt")
+            this.suchen.push(fahrtstrecke)
+            var neueSuche = {
+                suchender : this.userID,
+                strecke : fahrtstrecke
+            }
+            var alleSuchen = suchenListe()
+            alleSuchen.push(neueSuche)
+            fs.writeFileSync('./suchen.json', JSON.stringify(alleSuchen, null, 4), err => {
+                if (err) { console.log("Schreibfehler", err) }
+            })
         }
-        var alleSuchen = suchenListe()
-        alleSuchen.push(neueSuche)
-        fs.writeFileSync('./suchen.json', JSON.stringify(alleSuchen, null, 4), err => {
-            if (err) { console.log("Schreibfehler", err) }
-        })
     }
 }
 
