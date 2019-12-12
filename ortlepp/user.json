@@ -1,0 +1,12 @@
+[
+    {
+        "name" : "Robin",
+        "nachname" : "Ortlepp",
+        "Email" : "robin@ro-or.de",
+        "Wohnort" : {
+            "einwohnerzahl" : 350510,
+            "name" : "Bonn",
+            "bundesland" : "NRW"
+        }   
+    }
+]
