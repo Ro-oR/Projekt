@@ -1,62 +1,113 @@
 const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;//Installieren via "npm i xmlhttprequest"
-const apitoken = "3d67bf9773fba69970a84b25e1ae9b3d"
+const apitoken = "3d67bf9773fba69970a84b25e1ae9b3d";
 const xml2js = require('xml2js');//npm install xml2js
 const fs = require("fs");
 
-var util = require("util")
+const util = require("util");
 
 function umlautCheck(str){
-    str = str.replace(/ä/g, "%C3%A4") // /suchmuster/g = erste alle treffer 
-    str = str.replace(/ö/g, "%C3%B6") // und nicht nur den ersten wie bei "suchmuster"
-    str = str.replace(/ü/g, "%C3%BC")
-    str = str.replace(/Ä/g, "%C3%84")
-    str = str.replace(/Ö/g, "%C3%96")
-    str = str.replace(/Ü/g, "%C3%9C")
-    str = str.replace(/ß/g, "%C3%9F")
+    str = str.replace(/ä/g, "%C3%A4"); // /suchmuster/g = erste alle treffer
+    str = str.replace(/ö/g, "%C3%B6"); // und nicht nur den ersten wie bei "suchmuster"
+    str = str.replace(/ü/g, "%C3%BC");
+    str = str.replace(/Ä/g, "%C3%84");
+    str = str.replace(/Ö/g, "%C3%96");
+    str = str.replace(/Ü/g, "%C3%9C");
+    str = str.replace(/ß/g, "%C3%9F");
     return str
 }
 function HTML_UmlautConverter(str){
-    str = str.replace(/&#196;/g, "Ä")
-    str = str.replace(/&#228;/g, "ä")
-    str = str.replace(/&#214;/g, "Ö")
-    str = str.replace(/&#246;/g, "ö")
-    str = str.replace(/&#220;/g, "Ü")
-    str = str.replace(/&#252;/g, "ü")
-    str = str.replace(/&#223;/g, "ß")
+    str = str.replace(/&#196;/g, "Ä");
+    str = str.replace(/&#228;/g, "ä");
+    str = str.replace(/&#214;/g, "Ö");
+    str = str.replace(/&#246;/g, "ö");
+    str = str.replace(/&#220;/g, "Ü");
+    str = str.replace(/&#252;/g, "ü");
+    str = str.replace(/&#223;/g, "ß");
     return str
 }
 
 function bahnhofIDSuche(str){
-    var suche = umlautCheck(str)
-    var request = new XMLHttpRequest()
-    request.open("GET", "https://api.deutschebahn.com/stada/v2/stations?searchstring="+suche, false)
-    request.setRequestHeader("Authorization", "Bearer " + apitoken)
-    request.send()
-    var str = request.responseText
-    str = str.split("evaNumbers\":[{\"number\":")
-    var id = str[1].split(",")
+    let suche = umlautCheck(str);
+    let request = new XMLHttpRequest();
+    request.open("GET", "https://api.deutschebahn.com/stada/v2/stations?searchstring="+suche, false);
+    request.setRequestHeader("Authorization", "Bearer " + apitoken);
+    request.send();
+
+    if(request.status === "400"){
+        console.log("Syntax Fehler")
+        return "Fehler"
+    }
+    if(request.status === "401"){
+        console.log("Ungültiges Token")
+        return "Fehler"
+    }
+    if(request.status === "404"){
+        console.log("Nichts gefunden")
+        return "Fehler"
+    }
+    if(request.status === "500"){
+        console.log("Serverfehler")
+        return "Fehler"
+    }
+
+    let string = request.responseText;
+    string = string.split("evaNumbers\":[{\"number\":");
+    let id = string[1].split(",");
 
     return id[0]
 }
 
+/**
+ * @return {string}
+ */
+function datumHeute(){
+    let options = { year: '2-digit', month: '2-digit', day: '2-digit'};//, hour: '2-digit'};
+    let dat = new Date();
+    return dat.toLocaleDateString("de-DE", options).replace(/-/g, "");
+}
+
 module.exports = {
+    /**
+     * @return {string}
+     */
     Datum: function(){
-        var options = { year: '2-digit', month: '2-digit', day: '2-digit', hour: '2-digit'};
-        var dat = new Date();
-        var s = dat.toLocaleDateString("de-DE", options);
-        return s;
+        let options = { year: '2-digit', month: '2-digit', day: '2-digit'};//, hour: '2-digit'};
+        let dat = new Date();
+        return dat.toLocaleDateString("de-DE", options).replace(/-/g, "");
     },
     fahrplanAbfrage: function(startBahnhof, ziel, datum, stunde){
-        var bahnhofsID = bahnhofIDSuche(startBahnhof)
-        var request = new XMLHttpRequest()
-        request.open("GET", "https://api.deutschebahn.com/timetables/v1/plan/"+bahnhofsID+"/"+datum+"/"+stunde, false)
-        request.setRequestHeader("Authorization", "Bearer " + apitoken)
-        request.send()
+        if(datumHeute() > datum){
+            console.log("Datum in der Vergangenheit!")
+            return "Fehler"
+        }
+        let bahnhofsID = bahnhofIDSuche(startBahnhof);
+        let request = new XMLHttpRequest();
+        request.open("GET", "https://api.deutschebahn.com/timetables/v1/plan/"+bahnhofsID+"/"+datum+"/"+stunde, false);
+        request.setRequestHeader("Authorization", "Bearer " + apitoken);
+        request.send();
 
-        var response
+
+        if(request.status === "400"){
+            console.log("Syntax Fehler")
+            return "Fehler"
+        }
+        if(request.status === "401"){
+            console.log("Ungültiges Token")
+            return "Fehler"
+        }
+        if(request.status === "404"){
+            console.log("Nichts gefunden")
+            return "Fehler"
+        }
+        if(request.status === "410"){
+            console.log("Resource nicht verfügbar")
+            return "Fehler"
+        }
+
+        let response;
 
         const parser = new xml2js.Parser({ attrkey: "ATTR" });
-        let xml_string = request.responseText
+        let xml_string = request.responseText;
 
         parser.parseString(xml_string, function(error, result) {
             if(error === null) {
@@ -65,10 +116,10 @@ module.exports = {
             else { console.log(error) }
         });
 
-        var strecke
+        let strecke;
 
-        for(var i = 0; i < response.timetable.s.length; i++){
-            var string = JSON.stringify(response.timetable.s[i].ar[0]).split("ppth\":\"")[1]
+        for(let i = 0; i < response.timetable.s.length; i++){
+            let string = JSON.stringify(response.timetable.s[i].ar[0]).split("ppth\":\"")[1];
             if(string.toLocaleLowerCase().includes(ziel)) {
                 strecke = JSON.stringify(response.timetable.s[i].ar[0]).split("ppth\":\"")[1].split("\"}}")[0]
             }
@@ -76,29 +127,29 @@ module.exports = {
         return (strecke+"|"+startBahnhof).toLocaleLowerCase()
     },
     checkSuchen: function(strecke){
-        var suchen = JSON.parse(fs.readFileSync('./suchen.json', 'utf8', (err) => {
+        let suchen = JSON.parse(fs.readFileSync('./suchen.json', 'utf8', (err) => {
                 if (err) {
-                    console.log("Lesefehler", err)
-                    return
+                    console.log("Lesefehler", err);
+
                 }
             })
-        )
-        for(var i = 0; i < suchen.length; i++){
+        );
+        for(let i = 0; i < suchen.length; i++){
             if(strecke.includes(suchen[i].strecke)) return suchen[i].suchender
         }
         return 0
     },
     checkAngebote: function(strecke){
-        var angebote = JSON.parse(fs.readFileSync('./angebote.json', 'utf8', (err) => {
+        let angebote = JSON.parse(fs.readFileSync('./angebote.json', 'utf8', (err) => {
                 if (err) {
-                    console.log("Lesefehler", err)
-                    return
+                    console.log("Lesefehler", err);
+
                 }
             })
-        )
-        for(var i = 0; i < angebote.length; i++){
+        );
+        for(let i = 0; i < angebote.length; i++){
             if(angebote[i].strecke.includes(strecke)) return angebote[i].anbieter
         }
         return 0
     }
-}
+};

@@ -1,9 +1,9 @@
 const User = require("./user.js");
-const functions = require("./functions.js")
+const functions = require("./functions.js");
 
-var u1 = new User("Test1", "test1@test");
+let u1 = new User("Test1", "test1@test");
 
-var u2 = new User("Test2", "test2@test");
+let u2 = new User("Test2", "test2@test");
 // var u3 = new User("Test3", "test3@test");
 
 // console.log(u1.username + " " + u1.userID)
@@ -11,10 +11,5 @@ var u2 = new User("Test2", "test2@test");
 // u3.addRegionalTicket("NRW")
 // u3.addTicket("Köln - Berlin")
 
-console.log(functions.Datum())
-
-//console.log(functions.bahnhofIDSuche("gummersbach"))
-//console.log(functions.bahnhofIDSuche("köln hbf"))
-
-u1.addAngebot(functions.fahrplanAbfrage("gummersbach", "köln hbf","191216","09")) //Bei Fehlern heutiges Datum nutzen!
-u2.addSuche(functions.fahrplanAbfrage("dieringhausen", "köln hbf","191216","09"))
+u1.addAngebot(functions.fahrplanAbfrage("gummersbach", "köln hbf","200106","09")); //Bei Fehlern heutiges Datum nutzen!
+u2.addSuche(functions.fahrplanAbfrage("dieringhausen", "köln hbf","200106","09"));
