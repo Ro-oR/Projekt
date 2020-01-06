@@ -4,11 +4,17 @@
       <w>abfrage</w>
       <w>angebot</w>
       <w>bahnhof</w>
+      <w>bahnhofs</w>
       <w>dieringhausen</w>
       <w>fahrplan</w>
+      <w>fehler</w>
+      <w>gefunden</w>
       <w>gummersbach</w>
       <w>köln</w>
+      <w>nichts</w>
+      <w>serverfehler</w>
       <w>suche</w>
+      <w>ungültiges</w>
     </words>
   </dictionary>
 </component>

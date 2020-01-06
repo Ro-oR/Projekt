@@ -1,5 +1,5 @@
 const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;//Installieren via "npm i xmlhttprequest"
-const apitoken = "3d67bf9773fba69970a84b25e1ae9b3d";
+const apiToken = "3d67bf9773fba69970a84b25e1ae9b3d";
 const xml2js = require('xml2js');//npm install xml2js
 const fs = require("fs");
 
@@ -23,30 +23,22 @@ function HTML_UmlautConverter(str){
     str = str.replace(/&#220;/g, "Ü");
     str = str.replace(/&#252;/g, "ü");
     str = str.replace(/&#223;/g, "ß");
-    return str
+    return str;
 }
 
 function bahnhofIDSuche(str){
     let suche = umlautCheck(str);
     let request = new XMLHttpRequest();
     request.open("GET", "https://api.deutschebahn.com/stada/v2/stations?searchstring="+suche, false);
-    request.setRequestHeader("Authorization", "Bearer " + apitoken);
+    request.setRequestHeader("Authorization", "Bearer " + apiToken);
     request.send();
 
-    if(request.status === "400"){
-        console.log("Syntax Fehler")
-        return "Fehler"
-    }
-    if(request.status === "401"){
-        console.log("Ungültiges Token")
-        return "Fehler"
-    }
-    if(request.status === "404"){
-        console.log("Nichts gefunden")
-        return "Fehler"
-    }
-    if(request.status === "500"){
-        console.log("Serverfehler")
+    if(request.status !== 200){
+        if(request.status === 400) console.log("Syntax Fehler");
+        if(request.status === 401) console.log("Ungültiges Token");
+        if(request.status === 404) console.log("Nichts gefunden");
+        if(request.status === 500) console.log("Serverfehler");
+        else console.log(request.status);
         return "Fehler"
     }
 
@@ -77,30 +69,21 @@ module.exports = {
     },
     fahrplanAbfrage: function(startBahnhof, ziel, datum, stunde){
         if(datumHeute() > datum){
-            console.log("Datum in der Vergangenheit!")
+            console.log("Datum in der Vergangenheit!");
             return "Fehler"
         }
         let bahnhofsID = bahnhofIDSuche(startBahnhof);
         let request = new XMLHttpRequest();
         request.open("GET", "https://api.deutschebahn.com/timetables/v1/plan/"+bahnhofsID+"/"+datum+"/"+stunde, false);
-        request.setRequestHeader("Authorization", "Bearer " + apitoken);
+        request.setRequestHeader("Authorization", "Bearer " + apiToken);
         request.send();
 
-
-        if(request.status === "400"){
-            console.log("Syntax Fehler")
-            return "Fehler"
-        }
-        if(request.status === "401"){
-            console.log("Ungültiges Token")
-            return "Fehler"
-        }
-        if(request.status === "404"){
-            console.log("Nichts gefunden")
-            return "Fehler"
-        }
-        if(request.status === "410"){
-            console.log("Resource nicht verfügbar")
+        if(request.status !== 200){
+            if(request.status === 400) console.log("Syntax Fehler");
+            if(request.status === 401) console.log("Ungültiges Token");
+            if(request.status === 404) console.log("Nichts gefunden");
+            if(request.status === 410) console.log("Resource nicht verfügbar");
+            else console.log(request.status);
             return "Fehler"
         }
 
@@ -124,7 +107,7 @@ module.exports = {
                 strecke = JSON.stringify(response.timetable.s[i].ar[0]).split("ppth\":\"")[1].split("\"}}")[0]
             }
         }
-        return (strecke+"|"+startBahnhof).toLocaleLowerCase()
+        return [(strecke+"|"+startBahnhof).toLocaleLowerCase(), datum]
     },
     checkSuchen: function(strecke){
         let suchen = JSON.parse(fs.readFileSync('./suchen.json', 'utf8', (err) => {
@@ -151,5 +134,25 @@ module.exports = {
             if(angebote[i].strecke.includes(strecke)) return angebote[i].anbieter
         }
         return 0
-    }
+    }//,
+    //alteDatenLoschen: function () {//TODO Besserer Name
+    //    let options = { year: '2-digit', month: '2-digit', day: '2-digit'};//, hour: '2-digit'};
+    //    let dat = new Date();
+    //    dat.setDate(dat.getDate()-3)
+    //    dat = dat.toLocaleDateString("de-DE", options).replace(/-/g, "");
+//
+    //    let angebote = JSON.parse(fs.readFileSync('./angebote.json', 'utf8', (err) => {
+    //            if (err) {
+    //                console.log("Lesefehler", err);
+//
+    //            }
+    //        })
+    //    );
+    //    for (let i = 0; i < angebote.length -1; i++){
+    //        if(angebote[i].datum < dat) angebote[i].
+    //    }
+    //    fs.writeFileSync('./angebote.json', JSON.stringify(angebote, null, 4), err => {
+    //        if (err) { console.log("Schreibfehler", err) }
+    //    });
+    //}
 };
