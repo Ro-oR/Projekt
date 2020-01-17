@@ -1,22 +1,12 @@
 [
     {
         "suchender": 120,
-        "strecke": "köln hansaring|köln hbf|köln messe/deutz gl. 9-10|köln trimbornstr|köln frankfurter straße|rösrath-stümpen|rösrath|hoffnungsthal|honrath|overath|engelskirchen|ründeroth|dieringhausen|gummersbach"
+        "strecke": "köln hansaring|köln hbf|köln messe/deutz gl. 9-10|köln trimbornstr|köln frankfurter straße|rösrath-stümpen|rösrath|hoffnungsthal|honrath|overath|engelskirchen|ründeroth|dieringhausen|gummersbach",
+        "datum": 100
     },
     {
-        "suchender": 122,
-        "strecke": "köln hansaring|köln hbf|köln messe/deutz gl. 9-10|köln trimbornstr|köln frankfurter straße|rösrath-stümpen|rösrath|hoffnungsthal|honrath|overath|engelskirchen|ründeroth|dieringhausen|gummersbach"
-    },
-    {
-        "suchender": 123,
-        "strecke": "köln hansaring|köln hbf|köln messe/deutz gl. 9-10|köln trimbornstr|köln frankfurter straße|rösrath-stümpen|rösrath|hoffnungsthal|honrath|overath|engelskirchen|ründeroth|dieringhausen|gummersbach"
-    },
-    {
-        "suchender": 127,
-        "strecke": "köln hansaring|köln hbf|köln messe/deutz gl. 9-10|köln trimbornstr|köln frankfurter straße|rösrath-stümpen|rösrath|hoffnungsthal|honrath|overath|engelskirchen|ründeroth|dieringhausen|gummersbach"
-    },
-    {
-        "suchender": 129,
-        "strecke": "köln hansaring|köln hbf|köln messe/deutz gl. 9-10|köln trimbornstr|köln frankfurter straße|rösrath-stümpen|rösrath|hoffnungsthal|honrath|overath|engelskirchen|ründeroth|dieringhausen|gummersbach"
+        "suchender": 64,
+        "strecke": "köln hansaring|köln hbf|köln messe/deutz gl. 9-10|köln trimbornstr|köln frankfurter straße|rösrath-stümpen|rösrath|hoffnungsthal|honrath|overath|engelskirchen|ründeroth|dieringhausen",
+        "datum": 200106
     }
 ]
