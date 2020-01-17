@@ -134,25 +134,25 @@ module.exports = {
             if(angebote[i].strecke.includes(strecke)) return angebote[i].anbieter
         }
         return 0
-    }//,
-    //alteDatenLoschen: function () {//TODO Besserer Name
-    //    let options = { year: '2-digit', month: '2-digit', day: '2-digit'};//, hour: '2-digit'};
-    //    let dat = new Date();
-    //    dat.setDate(dat.getDate()-3)
-    //    dat = dat.toLocaleDateString("de-DE", options).replace(/-/g, "");
-//
-    //    let angebote = JSON.parse(fs.readFileSync('./angebote.json', 'utf8', (err) => {
-    //            if (err) {
-    //                console.log("Lesefehler", err);
-//
-    //            }
-    //        })
-    //    );
-    //    for (let i = 0; i < angebote.length -1; i++){
-    //        if(angebote[i].datum < dat) angebote[i].
-    //    }
-    //    fs.writeFileSync('./angebote.json', JSON.stringify(angebote, null, 4), err => {
-    //        if (err) { console.log("Schreibfehler", err) }
-    //    });
-    //}
+    },
+    alteDatenLoschen: function () {//TODO Besserer Name
+        let options = { year: '2-digit', month: '2-digit', day: '2-digit'};//, hour: '2-digit'};
+        let dat = new Date();
+        dat.setDate(dat.getDate()-3)
+        dat = dat.toLocaleDateString("de-DE", options).replace(/-/g, "");
+
+        let angebote = JSON.parse(fs.readFileSync('./angebote.json', 'utf8', (err) => {
+                if (err) {
+                    console.log("Lesefehler", err);
+
+                }
+            })
+        );
+        for (let i = 0; i < angebote.length -1; i++){
+            //if(angebote[i].datum < dat) angebote[i].
+        }
+        fs.writeFileSync('./angebote.json', JSON.stringify(angebote, null, 4), err => {
+            if (err) { console.log("Schreibfehler", err) }
+        });
+    }
 };

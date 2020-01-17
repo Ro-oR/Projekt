@@ -66,7 +66,8 @@ class User{
         this.angebote.push(fahrtstrecke);
         var neuesAngebot = {
             anbieter : this.userID,
-            strecke : fahrtstrecke
+            strecke : fahrtstrecke[0],
+            datum : fahrtstrecke[1]
         };
         var alleAngebote = angebotListe();
         alleAngebote.push(neuesAngebot);
@@ -85,7 +86,8 @@ class User{
             this.suchen.push(fahrtstrecke);
             var neueSuche = {
                 suchender : this.userID,
-                strecke : fahrtstrecke
+                strecke : fahrtstrecke[0],
+                datum : fahrtstrecke[1]
             };
             var alleSuchen = suchenListe();
             alleSuchen.push(neueSuche);
