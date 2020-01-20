@@ -68,9 +68,11 @@ module.exports = {
         return dat.toLocaleDateString("de-DE", options).replace(/-/g, "");
     },
     fahrplanAbfrage: function(startBahnhof, ziel, datum, stunde){
-        if(datumHeute() > datum){
-            console.log("Datum in der Vergangenheit!");
-            return "Fehler"
+        let dat = datumHeute()
+        if(dat > datum){
+            console.log("Datum in der Vergangenheit!\nAktuelles Datum wird verwendet (" + dat + ")");
+            datum = dat
+            //return "Fehler"
         }
         let bahnhofsID = bahnhofIDSuche(startBahnhof);
         let request = new XMLHttpRequest();
@@ -101,8 +103,17 @@ module.exports = {
 
         let strecke;
 
+        //console.log(response.timetable.s[0].ar)
+
         for(let i = 0; i < response.timetable.s.length; i++){
-            let string = JSON.stringify(response.timetable.s[i].ar[0]).split("ppth\":\"")[1];
+            let string;
+            try {
+                string = JSON.stringify(response.timetable.s[i].ar[0]).split("ppth\":\"")[1];
+            }
+            catch (e) {
+                console.log("Fehler ... \n" + e)
+                return "Fehler"
+            }
             if(string.toLocaleLowerCase().includes(ziel)) {
                 strecke = JSON.stringify(response.timetable.s[i].ar[0]).split("ppth\":\"")[1].split("\"}}")[0]
             }
@@ -148,10 +159,16 @@ module.exports = {
                 }
             })
         );
-        for (let i = 0; i < angebote.length -1; i++){
-            //if(angebote[i].datum < dat) angebote[i].
+        let angeboteNeu = [];
+        angeboteNeu.push(angebote[0]);//Testwert damit die Form gegeben bleibt, falls es die Datei zerschießt
+        for (let i = 1; i < angebote.length -1; i++){
+            console.log(i + ": " + dat + " " + angebote[i].datum);
+            if(dat < angebote[i].datum){
+                console.log(dat + " " + angebote[i].datum);
+                angeboteNeu.push(angebote[i])
+            }
         }
-        fs.writeFileSync('./angebote.json', JSON.stringify(angebote, null, 4), err => {
+        fs.writeFileSync('./angebote.json', JSON.stringify(angeboteNeu, null, 4), err => {
             if (err) { console.log("Schreibfehler", err) }
         });
     }

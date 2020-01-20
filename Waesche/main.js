@@ -11,7 +11,9 @@ let u2 = new User("Test2", "test2@test");
 // u3.addRegionalTicket("NRW")
 // u3.addTicket("Köln - Berlin")
 
-u1.addAngebot(functions.fahrplanAbfrage("gummersbach", "köln hbf",200106,"09")); //Bei Fehlern heutiges Datum nutzen!
-u2.addSuche(functions.fahrplanAbfrage("dieringhausen", "köln hbf",200106,"09"));
+//functions.alteDatenLoschen();
+
+u1.addAngebot(functions.fahrplanAbfrage("gummersbach", "köln hbf",200120,"14")); //Bei Fehlern heutiges Datum nutzen!
+u2.addSuche(functions.fahrplanAbfrage("dieringhausen", "köln hbf",200120,"09"));
 
 //functions.alteDatenLoschen();
