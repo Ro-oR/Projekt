@@ -109,16 +109,21 @@ module.exports = {
             let string;
             try {
                 string = JSON.stringify(response.timetable.s[i].ar[0]).split("ppth\":\"")[1];
+                if(string.toLocaleLowerCase().includes(ziel)) {
+                    strecke = JSON.stringify(response.timetable.s[i].ar[0]).split("ppth\":\"")[1].split("\"}}")[0]
+                    return [(strecke+"|"+startBahnhof).toLocaleLowerCase(), datum]
+                }
             }
             catch (e) {
-                console.log("Fehler ... \n" + e)
-                return "Fehler"
+                //console.log(response.timetable.s)
+                //console.log("Fehler ... \n" + e)
+                //return "Fehler"
             }
-            if(string.toLocaleLowerCase().includes(ziel)) {
-                strecke = JSON.stringify(response.timetable.s[i].ar[0]).split("ppth\":\"")[1].split("\"}}")[0]
-            }
+            //if(string.toLocaleLowerCase().includes(ziel)) {
+            //    strecke = JSON.stringify(response.timetable.s[i].ar[0]).split("ppth\":\"")[1].split("\"}}")[0]
+            //}
         }
-        return [(strecke+"|"+startBahnhof).toLocaleLowerCase(), datum]
+        //return [(strecke+"|"+startBahnhof).toLocaleLowerCase(), datum]
     },
     checkSuchen: function(strecke){
         let suchen = JSON.parse(fs.readFileSync('./suchen.json', 'utf8', (err) => {
