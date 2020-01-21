@@ -53,5 +53,20 @@
         "anbieter": 235,
         "strecke": "köln hansaring|köln hbf|köln messe/deutz gl. 9-10|köln trimbornstr|köln frankfurter straße|rösrath-stümpen|rösrath|hoffnungsthal|honrath|overath|engelskirchen|ründeroth|gummersbach-dieringhausen|gummersbach",
         "datum": 200120
+    },
+    {
+        "anbieter": 249,
+        "strecke": "köln hansaring|köln hbf|köln messe/deutz gl. 9-10|köln trimbornstr|köln frankfurter straße|rösrath-stümpen|rösrath|hoffnungsthal|honrath|overath|engelskirchen|ründeroth|gummersbach-dieringhausen|gummersbach",
+        "datum": 200121
+    },
+    {
+        "anbieter": 252,
+        "strecke": "köln hansaring|köln hbf|köln messe/deutz gl. 9-10|köln trimbornstr|köln frankfurter straße|rösrath-stümpen|rösrath|hoffnungsthal|honrath|overath|engelskirchen|ründeroth|gummersbach-dieringhausen|gummersbach",
+        "datum": 200121
+    },
+    {
+        "anbieter": 255,
+        "strecke": "köln hansaring|köln hbf|köln messe/deutz gl. 9-10|köln trimbornstr|köln frankfurter straße|rösrath-stümpen|rösrath|hoffnungsthal|honrath|overath|engelskirchen|ründeroth|gummersbach-dieringhausen|gummersbach",
+        "datum": 200121
     }
 ]

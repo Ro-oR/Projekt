@@ -67,6 +67,19 @@ module.exports = {
         let dat = new Date();
         return dat.toLocaleDateString("de-DE", options).replace(/-/g, "");
     },
+    newUser: function(userName, userContact){
+        const User = require("./user.js");
+        let u = new User(userName, userContact);
+        return u.userID + " " + u.contact
+    },
+    addUserData: function(user){
+        fs.writeFileSync('./userData.json', JSON.stringify(user), err => {
+            if (err) { console.log("Schreibfehler", err) }
+        });
+    },
+    readUserData: function(){
+        asda
+    },
     fahrplanAbfrage: function(startBahnhof, ziel, datum, stunde){
         let dat = datumHeute()
         if(dat > datum){
