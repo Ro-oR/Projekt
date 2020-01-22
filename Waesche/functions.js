@@ -58,6 +58,32 @@ function datumHeute(){
     return dat.toLocaleDateString("de-DE", options).replace(/-/g, "");
 }
 
+function allUserData(){
+    let allUsers = JSON.parse(fs.readFileSync('./userData.json', 'utf8', (err) => {
+            if (err) {
+                console.log("Lesefehler", err);
+
+            }
+        })
+    );
+    return allUsers
+}
+
+function addUserData(user){
+    if (user === undefined) {
+        console.log("user undefined");
+        return
+    }
+    let allUsers = allUserData();
+    allUsers.push(user);
+    fs.writeFileSync('./userData.json', JSON.stringify(allUsers, null, 4), err => {
+        if (err) { console.log("Schreibfehler", err) }
+    });
+}
+
+
+exports.addUserData = addUserData();
+
 module.exports = {
     /**
      * @return {string}
@@ -70,18 +96,21 @@ module.exports = {
     newUser: function(userName, userContact){
         const User = require("./user.js");
         let u = new User(userName, userContact);
+        addUserData(u);
         return u.userID + " " + u.contact
     },
-    addUserData: function(user){
-        fs.writeFileSync('./userData.json', JSON.stringify(user), err => {
-            if (err) { console.log("Schreibfehler", err) }
-        });
+    getUserByID: function(id){
+        let users = allUserData()
+        for(let i = 0; i<users.length; i++){
+            //console.log(users[i].username + " " + users[i].userID)
+            if(users[i].userID === id) return users[i];
+        }
     },
     readUserData: function(){
-        asda
+        return allUserData()
     },
     fahrplanAbfrage: function(startBahnhof, ziel, datum, stunde){
-        let dat = datumHeute()
+        let dat = datumHeute();
         if(dat > datum){
             console.log("Datum in der Vergangenheit!\nAktuelles Datum wird verwendet (" + dat + ")");
             datum = dat

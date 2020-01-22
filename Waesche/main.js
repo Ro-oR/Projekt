@@ -13,10 +13,13 @@ let u2 = new User("Test2", "test2@test");
 
 //functions.alteDatenLoschen();
 
-u1.addAngebot(functions.fahrplanAbfrage("gummersbach", "köln hbf",200121,"16")); //Bei Fehlern heutiges Datum nutzen!
+//let userData = functions.readUserData();
+//functions.addUserData(u1);
+
+u1.addAngebot(functions.fahrplanAbfrage("gummersbach", "köln hbf",200121,"16"));
 u2.addSuche(functions.fahrplanAbfrage("dieringhausen", "köln hbf",200121,"16"));
 
-console.log(functions.newUser("test", "asdasdasda"));
-functions.addUserData(u1);
+functions.newUser("TestUser", "asdasd")//addUserData(u1);
+functions.getUserByID(234);
 
 //functions.alteDatenLoschen();

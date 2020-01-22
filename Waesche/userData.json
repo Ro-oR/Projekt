@@ -1,1 +1,110 @@
-{"userID":255,"username":"Test1","contact":"test1@test","tickets":[],"angebote":[["köln hansaring|köln hbf|köln messe/deutz gl. 9-10|köln trimbornstr|köln frankfurter straße|rösrath-stümpen|rösrath|hoffnungsthal|honrath|overath|engelskirchen|ründeroth|gummersbach-dieringhausen|gummersbach",200121]],"suchen":[]}
+[
+    {
+        "userID": 271,
+        "username": "asda",
+        "contact": "asdasd",
+        "tickets": [],
+        "angebote": [],
+        "suchen": []
+    },
+    {
+        "userID": 268,
+        "username": "Test1",
+        "contact": "test1@test",
+        "tickets": [],
+        "angebote": [
+            [
+                "köln hansaring|köln hbf|köln messe/deutz gl. 9-10|köln trimbornstr|köln frankfurter straße|rösrath-stümpen|rösrath|hoffnungsthal|honrath|overath|engelskirchen|ründeroth|gummersbach-dieringhausen|gummersbach",
+                200121
+            ]
+        ],
+        "suchen": []
+    },
+    {
+        "userID": 278,
+        "username": "asda",
+        "contact": "asdasd",
+        "tickets": [],
+        "angebote": [],
+        "suchen": []
+    },
+    {
+        "userID": 275,
+        "username": "Test1",
+        "contact": "test1@test",
+        "tickets": [],
+        "angebote": [
+            [
+                "köln hansaring|köln hbf|köln messe/deutz gl. 9-10|köln trimbornstr|köln frankfurter straße|rösrath-stümpen|rösrath|hoffnungsthal|honrath|overath|engelskirchen|ründeroth|gummersbach-dieringhausen|gummersbach",
+                200121
+            ]
+        ],
+        "suchen": []
+    },
+    {
+        "userID": 282,
+        "username": "asda",
+        "contact": "asdasd",
+        "tickets": [],
+        "angebote": [],
+        "suchen": []
+    },
+    {
+        "userID": 279,
+        "username": "Test1",
+        "contact": "test1@test",
+        "tickets": [],
+        "angebote": [
+            [
+                "köln hansaring|köln hbf|köln messe/deutz gl. 9-10|köln trimbornstr|köln frankfurter straße|rösrath-stümpen|rösrath|hoffnungsthal|honrath|overath|engelskirchen|ründeroth|gummersbach-dieringhausen|gummersbach",
+                200121
+            ]
+        ],
+        "suchen": []
+    },
+    {
+        "userID": 283,
+        "username": "Test1",
+        "contact": "test1@test",
+        "tickets": [],
+        "angebote": [
+            [
+                "köln hansaring|köln hbf|köln messe/deutz gl. 9-10|köln trimbornstr|köln frankfurter straße|rösrath-stümpen|rösrath|hoffnungsthal|honrath|overath|engelskirchen|ründeroth|gummersbach-dieringhausen|gummersbach",
+                200121
+            ]
+        ],
+        "suchen": []
+    },
+    {
+        "userID": 320,
+        "username": "TestUser",
+        "contact": "asdasd",
+        "tickets": [],
+        "angebote": [],
+        "suchen": []
+    },
+    {
+        "userID": 323,
+        "username": "TestUser",
+        "contact": "asdasd",
+        "tickets": [],
+        "angebote": [],
+        "suchen": []
+    },
+    {
+        "userID": 326,
+        "username": "TestUser",
+        "contact": "asdasd",
+        "tickets": [],
+        "angebote": [],
+        "suchen": []
+    },
+    {
+        "userID": 329,
+        "username": "TestUser",
+        "contact": "asdasd",
+        "tickets": [],
+        "angebote": [],
+        "suchen": []
+    }
+]

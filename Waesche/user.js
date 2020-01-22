@@ -64,6 +64,13 @@ class User{
     addAngebot(fahrtstrecke){
         if(fahrtstrecke === "Fehler") return;
         this.angebote.push(fahrtstrecke);
+        let users = functions.readUserData();
+        console.log(users)
+        for(let i = 0; i < users.length; i++){
+            if (users[i] !== null) {
+                if (users[i].userID === this.userID) users[i] = this//users[i].angebote.push(fahrtstrecke)
+            }
+        }
         var neuesAngebot = {
             anbieter : this.userID,
             strecke : fahrtstrecke[0],
