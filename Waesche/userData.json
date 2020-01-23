@@ -1,29 +1,5 @@
 [
     {
-        "userID": 405,
-        "username": "Neu1",
-        "contact": "asda",
-        "tickets": [],
-        "angebote": [],
-        "suchen": []
-    },
-    {
-        "userID": 406,
-        "username": "Neu2",
-        "contact": "asdaa",
-        "tickets": [],
-        "angebote": [],
-        "suchen": []
-    },
-    {
-        "userID": 409,
-        "username": "TestUser",
-        "contact": "asdasd",
-        "tickets": [],
-        "angebote": [],
-        "suchen": []
-    },
-    {
         "userID": 414,
         "username": "TestUser",
         "contact": "asdasd",
@@ -31,23 +7,7 @@
         "angebote": [
             [
                 "köln hansaring|köln hbf|köln messe/deutz gl. 9-10|köln trimbornstr|köln frankfurter straße|rösrath-stümpen|rösrath|hoffnungsthal|honrath|overath|engelskirchen|ründeroth|gummersbach-dieringhausen|gummersbach",
-                "200123"
-            ],
-            [
-                "köln hansaring|köln hbf|köln messe/deutz gl. 9-10|köln trimbornstr|köln frankfurter straße|rösrath-stümpen|rösrath|hoffnungsthal|honrath|overath|engelskirchen|ründeroth|gummersbach-dieringhausen|gummersbach",
-                "200123"
-            ],
-            [
-                "köln hansaring|köln hbf|köln messe/deutz gl. 9-10|köln trimbornstr|köln frankfurter straße|rösrath-stümpen|rösrath|hoffnungsthal|honrath|overath|engelskirchen|ründeroth|gummersbach-dieringhausen|gummersbach",
-                "200123"
-            ],
-            [
-                "köln hansaring|köln hbf|köln messe/deutz gl. 9-10|köln trimbornstr|köln frankfurter straße|rösrath-stümpen|rösrath|hoffnungsthal|honrath|overath|engelskirchen|ründeroth|gummersbach-dieringhausen|gummersbach",
-                "200123"
-            ],
-            [
-                "köln hansaring|köln hbf|köln messe/deutz gl. 9-10|köln trimbornstr|köln frankfurter straße|rösrath-stümpen|rösrath|hoffnungsthal|honrath|overath|engelskirchen|ründeroth|gummersbach-dieringhausen|gummersbach",
-                "200123"
+                "200122"
             ],
             [
                 "köln hansaring|köln hbf|köln messe/deutz gl. 9-10|köln trimbornstr|köln frankfurter straße|rösrath-stümpen|rösrath|hoffnungsthal|honrath|overath|engelskirchen|ründeroth|gummersbach-dieringhausen|gummersbach",
@@ -57,66 +17,18 @@
         "suchen": [
             [
                 "köln hansaring|köln hbf|köln messe/deutz gl. 9-10|köln trimbornstr|köln frankfurter straße|rösrath-stümpen|rösrath|hoffnungsthal|honrath|overath|engelskirchen|ründeroth|gummersbach-dieringhausen|gummersbach",
-                "200123"
+                "200124"
             ],
             [
                 "köln hansaring|köln hbf|köln messe/deutz gl. 9-10|köln trimbornstr|köln frankfurter straße|rösrath-stümpen|rösrath|hoffnungsthal|honrath|overath|engelskirchen|ründeroth|gummersbach-dieringhausen|gummersbach",
-                "200123"
+                "200125"
             ]
         ]
     },
     {
-        "userID": 419,
-        "username": "TestUser",
-        "contact": "asdasd",
-        "tickets": [],
-        "angebote": [],
-        "suchen": []
-    },
-    {
-        "userID": 424,
-        "username": "TestUser",
-        "contact": "asdasd",
-        "tickets": [],
-        "angebote": [],
-        "suchen": []
-    },
-    {
-        "userID": 429,
-        "username": "TestUser",
-        "contact": "asdasd",
-        "tickets": [],
-        "angebote": [],
-        "suchen": []
-    },
-    {
-        "userID": 434,
-        "username": "TestUser",
-        "contact": "asdasd",
-        "tickets": [],
-        "angebote": [],
-        "suchen": []
-    },
-    {
-        "userID": 439,
-        "username": "TestUser",
-        "contact": "asdasd",
-        "tickets": [],
-        "angebote": [],
-        "suchen": []
-    },
-    {
         "userID": 444,
         "username": "TestUser",
-        "contact": "asdasd",
-        "tickets": [],
-        "angebote": [],
-        "suchen": []
-    },
-    {
-        "userID": 485,
-        "username": "Tchaikovsky",
-        "contact": "4646828516",
+        "contact": "Test@test.te",
         "tickets": [],
         "angebote": [],
         "suchen": []

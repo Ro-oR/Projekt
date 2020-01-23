@@ -1,9 +1,7 @@
-const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;//Installieren via "npm i xmlhttprequest"
+const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 const apiToken = "3d67bf9773fba69970a84b25e1ae9b3d";
-const xml2js = require('xml2js');//npm install xml2js
+const xml2js = require('xml2js');
 const fs = require("fs");
-
-const util = require("util");
 
 function umlautCheck(str){
     str = str.replace(/ä/g, "%C3%A4"); // /suchmuster/g = erste alle treffer
@@ -49,9 +47,6 @@ function bahnhofIDSuche(str){
     return id[0]
 }
 
-/**
- * @return {string}
- */
 function datumHeute(){
     let options = { year: '2-digit', month: '2-digit', day: '2-digit'};//, hour: '2-digit'};
     let dat = new Date();
@@ -85,9 +80,6 @@ function addUserData(user){
 exports.addUserData = addUserData();
 
 module.exports = {
-    /**
-     * @return {string}
-     */
     Datum: function(){
         let options = { year: '2-digit', month: '2-digit', day: '2-digit', hour: '2-digit', minute: "2-digit", second: "2-digit"};
         let dat = new Date();
@@ -103,6 +95,7 @@ module.exports = {
         const User = require("./user.js");
         let users = allUserData();
         let u = new User("", "");
+        let alteID = u.userID;
         for(let i = 0; i<users.length; i++){
             if(users[i].userID === id){
                 u.userID = users[i].userID;
@@ -113,6 +106,7 @@ module.exports = {
                 u.suchen = users[i].suchen;
             }
         }
+        if(u.userID === alteID) return "User nicht gefunden";
         return u
     },
     readUserData: function(){
@@ -160,7 +154,7 @@ module.exports = {
                 try {
                     string = JSON.stringify(response.timetable.s[i].ar[0]).split("ppth\":\"")[1];
                     if (string.toLocaleLowerCase().includes(ziel)) {
-                        strecke = JSON.stringify(response.timetable.s[i].ar[0]).split("ppth\":\"")[1].split("\"}}")[0]
+                        strecke = JSON.stringify(response.timetable.s[i].ar[0]).split("ppth\":\"")[1].split("\"}}")[0];
                         return [(strecke + "|" + startBahnhof).toLocaleLowerCase(), datum]
                     }
                 } catch (e) {
@@ -168,40 +162,50 @@ module.exports = {
             }
         }
         catch (e) {
-            console.log(e)
+            console.log(e);
             return "Fehler 500"
         }
     },
-    checkSuchen: function(strecke){//TODO
-        let suchen = JSON.parse(fs.readFileSync('./suchen.json', 'utf8', (err) => {
-                if (err) {
-                    console.log("Lesefehler", err);
+    checkSuchen: function(strecke, datum){
+        try{
+            let suchen = JSON.parse(fs.readFileSync('./suchen.json', 'utf8', (err) => {
+                    if (err) {
+                        console.log("Lesefehler", err);
 
-                }
-            })
-        );
-        for(let i = 0; i < suchen.length; i++){
-            if(strecke.includes(suchen[i].strecke)) return suchen[i].suchender
+                    }
+                })
+            );
+            for(let i = 0; i < suchen.length; i++){
+                if(strecke.includes(suchen[i].strecke) && suchen[i].datum === datum) return suchen[i].suchender
+            }
+            return 0
         }
-        return 0
+        catch (e) {
+            return "Fehler 500"
+        }
     },
-    checkAngebote: function(strecke){//TODO
-        let angebote = JSON.parse(fs.readFileSync('./angebote.json', 'utf8', (err) => {
-                if (err) {
-                    console.log("Lesefehler", err);
+    checkAngebote: function(strecke, datum){
+        try {
+            let angebote = JSON.parse(fs.readFileSync('./angebote.json', 'utf8', (err) => {
+                    if (err) {
+                        console.log("Lesefehler", err);
 
-                }
-            })
-        );
-        for(let i = 0; i < angebote.length; i++){
-            if(angebote[i].strecke.includes(strecke)) return angebote[i].anbieter
+                    }
+                })
+            );
+            for (let i = 0; i < angebote.length; i++) {
+                if (angebote[i].strecke.includes(strecke) && angebote[i].datum === datum) return angebote[i].anbieter
+            }
+            return 0
         }
-        return 0
+        catch (e) {
+            return "Fehler 500"
+        }
     },
-    alteDatenLoschen: function () {//TODO Besserer Name
+    alteDatenLoeschen: function () {
         let options = { year: '2-digit', month: '2-digit', day: '2-digit'};//, hour: '2-digit'};
         let dat = new Date();
-        dat.setDate(dat.getDate()-3)
+        dat.setDate(dat.getDate()-3);
         dat = dat.toLocaleDateString("de-DE", options).replace(/-/g, "");
 
         let angebote = JSON.parse(fs.readFileSync('./angebote.json', 'utf8', (err) => {
@@ -212,7 +216,6 @@ module.exports = {
             })
         );
         let angeboteNeu = [];
-        angeboteNeu.push(angebote[0]);//Testwert damit die Form gegeben bleibt, falls es die Datei zerschießt
         for (let i = 1; i < angebote.length -1; i++){
             console.log(i + ": " + dat + " " + angebote[i].datum);
             if(dat < angebote[i].datum){

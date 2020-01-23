@@ -78,7 +78,7 @@ class User{
             let returnString = "";
             this.angebote.push(fahrtstrecke);
 
-            this.writeUserData()
+            this.writeUserData();
 
             let neuesAngebot = {
                 anbieter: this.userID,
@@ -92,20 +92,20 @@ class User{
                     console.log("Schreibfehler", err)
                 }
             });
-            let suchen = functions.checkSuchen(fahrtstrecke);
-            if (suchen !== 0) returnString = "Mitfahrer gefunden! UserID " + suchen
-            else returnString = "Angebot erfolgreich eingefügt"
+            let suchen = functions.checkSuchen(fahrtstrecke[0], fahrtstrecke[1]);
+            if (suchen !== 0) returnString = "Mitfahrer gefunden! UserID " + suchen;
+            else returnString = "Angebot erfolgreich eingefügt";
             return returnString
         }
         catch (e) {
-            console.log(e)
+            console.log(e);
             return "Fehler 500"
         }
     }
     addSuche(fahrtstrecke){
         try{
             if(fahrtstrecke.includes("Fehler")) return fahrtstrecke;
-            let anbieter = functions.checkAngebote(fahrtstrecke);
+            let anbieter = functions.checkAngebote(fahrtstrecke[0], fahrtstrecke[1]);
             let returnString = "";
             if(anbieter !== 0) returnString = "Anbieter gefunden! UserID " + anbieter;
             else {
@@ -129,18 +129,9 @@ class User{
             return returnString
         }
         catch (e) {
-            console.log(e)
+            console.log(e);
             return "Fehler 500"
         }
-    }
-    printUser(){//TODO Rausnehmen!
-        console.log("\nTest");
-        console.log(this.userID);
-        console.log(this.username);
-        console.log(this.contact);
-        console.log(this.tickets);
-        console.log(this.angebote);
-        console.log(this.suchen + "\n");
     }
 }
 //
