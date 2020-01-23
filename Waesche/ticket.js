@@ -1,7 +1,7 @@
 const fs = require("fs");
 
 function ticketCount(){
-    var count = JSON.parse(fs.readFileSync('./ticketCount.json', 'utf8', (err) => {
+    let count = JSON.parse(fs.readFileSync('./ticketCount.json', 'utf8', (err) => {
             if (err) {
                 console.log("Lesefehler", err)
                 return

@@ -1,7 +1,17 @@
 {
-  "name": "Waesche",
+  "name": "waesche",
   "version": "1.0.0",
   "dependencies": {
-    "xml2js": "latest"
-  }
+    "express": "^4.17.1",
+    "xml2js": "^0.4.23",
+    "xmlhttprequest": "^1.8.0"
+  },
+  "main": "main.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }

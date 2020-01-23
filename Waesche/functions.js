@@ -39,7 +39,7 @@ function bahnhofIDSuche(str){
         if(request.status === 404) console.log("Nichts gefunden");
         if(request.status === 500) console.log("Serverfehler");
         else console.log(request.status);
-        return "Fehler"
+        return "Fehler "+request.status
     }
 
     let string = request.responseText;
@@ -89,22 +89,21 @@ module.exports = {
      * @return {string}
      */
     Datum: function(){
-        let options = { year: '2-digit', month: '2-digit', day: '2-digit'};//, hour: '2-digit'};
+        let options = { year: '2-digit', month: '2-digit', day: '2-digit', hour: '2-digit', minute: "2-digit", second: "2-digit"};
         let dat = new Date();
-        return dat.toLocaleDateString("de-DE", options).replace(/-/g, "");
+        return dat.toLocaleDateString("de-DE", options);
     },
     newUser: function(userName, userContact){
         const User = require("./user.js");
         let u = new User(userName, userContact);
         addUserData(u);
-        return u.userID + " " + u.contact
+        return "ID: " +u.userID + " " + u.username +  "  " + u.contact
     },
     getUserByID: function(id){
         const User = require("./user.js");
         let users = allUserData();
         let u = new User("", "");
         for(let i = 0; i<users.length; i++){
-            //console.log(users[i].username + " " + users[i].userID)
             if(users[i].userID === id){
                 u.userID = users[i].userID;
                 u.username = users[i].username;
@@ -114,71 +113,66 @@ module.exports = {
                 u.suchen = users[i].suchen;
             }
         }
-        console.log(u)
         return u
     },
     readUserData: function(){
         return allUserData()
     },
     fahrplanAbfrage: function(startBahnhof, ziel, datum, stunde){
-        let dat = datumHeute();
-        if(dat > datum){
-            console.log("Datum in der Vergangenheit!\nAktuelles Datum wird verwendet (" + dat + ")");
-            datum = dat
-            //return "Fehler"
-        }
-        let bahnhofsID = bahnhofIDSuche(startBahnhof);
-        let request = new XMLHttpRequest();
-        request.open("GET", "https://api.deutschebahn.com/timetables/v1/plan/"+bahnhofsID+"/"+datum+"/"+stunde, false);
-        request.setRequestHeader("Authorization", "Bearer " + apiToken);
-        request.send();
-
-        if(request.status !== 200){
-            if(request.status === 400) console.log("Syntax Fehler");
-            if(request.status === 401) console.log("Ungültiges Token");
-            if(request.status === 404) console.log("Nichts gefunden");
-            if(request.status === 410) console.log("Resource nicht verfügbar");
-            else console.log(request.status);
-            return "Fehler"
-        }
-
-        let response;
-
-        const parser = new xml2js.Parser({ attrkey: "ATTR" });
-        let xml_string = request.responseText;
-
-        parser.parseString(xml_string, function(error, result) {
-            if(error === null) {
-                response = result
+        try {
+            let dat = datumHeute();
+            if (dat > datum) {
+                console.log("Datum in der Vergangenheit!\nAktuelles Datum wird verwendet (" + dat + ")");
+                datum = dat
             }
-            else { console.log(error) }
-        });
+            let bahnhofsID = bahnhofIDSuche(startBahnhof);
+            let request = new XMLHttpRequest();
+            request.open("GET", "https://api.deutschebahn.com/timetables/v1/plan/" + bahnhofsID + "/" + datum + "/" + stunde, false);
+            request.setRequestHeader("Authorization", "Bearer " + apiToken);
+            request.send();
 
-        let strecke;
+            if (request.status !== 200) {
+                if (request.status === 400) console.log("Syntax Fehler");
+                if (request.status === 401) console.log("Ungültiges Token");
+                if (request.status === 404) console.log("Nichts gefunden");
+                if (request.status === 410) console.log("Resource nicht verfügbar");
+                else console.log(request.status);
+                return "Fehler " + request.status
+            }
 
-        //console.log(response.timetable.s[0].ar)
+            let response;
 
-        for(let i = 0; i < response.timetable.s.length; i++){
-            let string;
-            try {
-                string = JSON.stringify(response.timetable.s[i].ar[0]).split("ppth\":\"")[1];
-                if(string.toLocaleLowerCase().includes(ziel)) {
-                    strecke = JSON.stringify(response.timetable.s[i].ar[0]).split("ppth\":\"")[1].split("\"}}")[0]
-                    return [(strecke+"|"+startBahnhof).toLocaleLowerCase(), datum]
+            const parser = new xml2js.Parser({attrkey: "ATTR"});
+            let xml_string = request.responseText;
+
+            parser.parseString(xml_string, function (error, result) {
+                if (error === null) {
+                    response = result
+                } else {
+                    console.log(error)
+                }
+            });
+
+            let strecke;
+
+            for (let i = 0; i < response.timetable.s.length; i++) {
+                let string;
+                try {
+                    string = JSON.stringify(response.timetable.s[i].ar[0]).split("ppth\":\"")[1];
+                    if (string.toLocaleLowerCase().includes(ziel)) {
+                        strecke = JSON.stringify(response.timetable.s[i].ar[0]).split("ppth\":\"")[1].split("\"}}")[0]
+                        return [(strecke + "|" + startBahnhof).toLocaleLowerCase(), datum]
+                    }
+                } catch (e) {
                 }
             }
-            catch (e) {
-                //console.log(response.timetable.s)
-                //console.log("Fehler ... \n" + e)
-                //return "Fehler"
-            }
-            //if(string.toLocaleLowerCase().includes(ziel)) {
-            //    strecke = JSON.stringify(response.timetable.s[i].ar[0]).split("ppth\":\"")[1].split("\"}}")[0]
-            //}
         }
-        //return [(strecke+"|"+startBahnhof).toLocaleLowerCase(), datum]
+        catch (e) {
+            console.log(e)
+            return "Fehler 500"
+        }
     },
-    checkSuchen: function(strecke){
+    checkSuchen: function(strecke){//TODO
         let suchen = JSON.parse(fs.readFileSync('./suchen.json', 'utf8', (err) => {
                 if (err) {
                     console.log("Lesefehler", err);
@@ -191,7 +185,7 @@ module.exports = {
         }
         return 0
     },
-    checkAngebote: function(strecke){
+    checkAngebote: function(strecke){//TODO
         let angebote = JSON.parse(fs.readFileSync('./angebote.json', 'utf8', (err) => {
                 if (err) {
                     console.log("Lesefehler", err);
