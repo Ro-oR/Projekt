@@ -100,11 +100,22 @@ module.exports = {
         return u.userID + " " + u.contact
     },
     getUserByID: function(id){
-        let users = allUserData()
+        const User = require("./user.js");
+        let users = allUserData();
+        let u = new User("", "");
         for(let i = 0; i<users.length; i++){
             //console.log(users[i].username + " " + users[i].userID)
-            if(users[i].userID === id) return users[i];
+            if(users[i].userID === id){
+                u.userID = users[i].userID;
+                u.username = users[i].username;
+                u.contact = users[i].contact;
+                u.tickets = users[i].tickets;
+                u.angebote = users[i].angebote;
+                u.suchen = users[i].suchen;
+            }
         }
+        console.log(u)
+        return u
     },
     readUserData: function(){
         return allUserData()

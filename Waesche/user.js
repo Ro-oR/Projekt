@@ -103,6 +103,15 @@ class User{
             })
         }
     }
+    printUser(){//TODO Rausnehmen!
+        console.log("\nTest");
+        console.log(this.userID);
+        console.log(this.username);
+        console.log(this.contact);
+        console.log(this.tickets);
+        console.log(this.angebote);
+        console.log(this.suchen + "\n");
+    }
 }
 //
 module.exports = User;
