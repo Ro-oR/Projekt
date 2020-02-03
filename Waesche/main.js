@@ -6,6 +6,11 @@ api.listen(3000, () => {
     console.log("API erfolgreich gestartet!\n" + functions.Datum());
 });
 
+
+api.get("/", (req,res) => {
+    res.send("Server is running!")
+});
+
 api.get("/angebote/:id", (req, res) =>{
     let id = parseInt(req.params.id);
     let u = functions.getUserByID(id);
