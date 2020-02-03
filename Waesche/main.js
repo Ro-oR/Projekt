@@ -14,7 +14,7 @@ api.get("/angebote/:id", (req, res) =>{
     if (ergebnis === "Fehler 500") res.send("500 Serverfehler");
     if(ergebnis !== 0) {
         let partner = functions.getUserByID(ergebnis);
-        res.send("Partner gefunden! " + partner.userID + " " + partner.username + " " + partner.contact)
+        res.send("Partner gefunden! \nID:" + partner.userID + "\nName: " + partner.username + "\nKontaktdaten: " + partner.contact)
     }
     else res.send("Kein Partner gefunden")
 });
@@ -27,7 +27,7 @@ api.get("/suchen/:id", (req, res) =>{
     if (ergebnis === "Fehler 500") res.send("500 Serverfehler");
     if(ergebnis !== 0) {
         let partner = functions.getUserByID(ergebnis);
-        res.send("Partner gefunden! " + partner.userID + " " + partner.username + " " + partner.contact)
+        res.send("Partner gefunden! \nID:" + partner.userID + "\nName: " + partner.username + "\nKontaktdaten: " + partner.contact)
     }
     else res.send("Kein Partner gefunden")
 });
